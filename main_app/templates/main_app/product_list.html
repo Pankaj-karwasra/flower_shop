@@ -1,0 +1,31 @@
+<!-- main_app/templates/main_app/product_list.html -->
+
+{% extends "main_app/base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <h1 style="text-align: center; font-size: 2em; color: #333;">Products</h1>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for product in products %}
+        <li style="border-bottom: 1px solid #ccc; padding: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <a href="{% url 'product_detail' product.id %}" style="font-size: 1.2em; color: #2196F3; text-decoration: none;">{{ product.name }}</a>
+                <span style="font-size: 1.2em; color: #000;"> - ${{ product.price }}</span>
+            </div>
+            <form action="{% url 'add_to_cart' product.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Add to Cart</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    a:hover {
+        text-decoration: underline;
+    }
+    button:hover {
+        background-color: #388E3C;
+    }
+</style>
+{% endblock %}

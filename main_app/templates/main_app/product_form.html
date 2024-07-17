@@ -1,0 +1,28 @@
+<!-- main_app/templates/main_app/product_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% if product %}Update Product{% else %}Create Product{% endif %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="product-form-container">
+            <h2>{% if product %}Update Product{% else %}Create Product{% endif %}</h2>
+            <form method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>{% if product %}Update Product{% else %}Create Product{% endif %}</legend>
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

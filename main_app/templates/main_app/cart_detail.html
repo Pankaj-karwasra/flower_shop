@@ -1,0 +1,40 @@
+<!-- main_app/templates/main_app/cart_detail.html -->
+
+{% extends "main_app/base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <h1 style="text-align: center; font-size: 2em; color: #333;">Your Shopping Cart</h1>
+    <ul style="list-style: none; padding: 0;">
+        {% for item in cart_items %}
+        <li style="margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center;">
+            <span>{{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }}</span>
+            <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+                    Remove
+                </button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if cart_items %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'checkout' %}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <p style="text-align: center; font-size: 1.2em; color: #777;">Your cart is empty.</p>
+    {% endif %}
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'product_list' %}" style="padding: 10px 20px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">Continue Shopping</a>
+    </div>
+</div>
+
+<style>
+    button:hover {
+        background-color: #d32f2f;
+    }
+    a:hover {
+        background-color: #1976D2;
+    }
+</style>
+{% endblock %}

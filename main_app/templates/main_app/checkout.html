@@ -1,0 +1,30 @@
+<!-- main_app/templates/main_app/checkout.html -->
+
+{% extends "main_app/base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <h1 style="text-align: center; font-size: 2em; color: #333;">Checkout</h1>
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <ul style="list-style-type: none; padding: 0;">
+            {% for item in cart_items %}
+            <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+                <span style="font-size: 1.2em; color: #000;">{{ item.product.name }}</span>
+                <span style="font-size: 1.2em; color: #000;"> - ${{ item.product.price }} x {{ item.quantity }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="submit" style="display: block; width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 1.2em; cursor: pointer; margin-top: 20px; transition: background-color 0.3s;">Place Order</button>
+    </form>
+    <a href="{% url 'cart_detail' %}" style="display: block; margin-top: 20px; text-align: center; text-decoration: none; color: #2196F3;">Back to Cart</a>
+</div>
+
+<style>
+    button:hover {
+        background-color: #388E3C;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

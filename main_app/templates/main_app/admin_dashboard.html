@@ -1,0 +1,14 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h2 style="margin-top: 20px;">Admin Dashboard</h2>
+    <p>Welcome, <strong>{{ user.username }}</strong>!</p>
+    <p>This is your administrative dashboard.</p>
+    <div style="margin-top: 20px;">
+        <a href="{% url 'admin:app_list' app_label='main_app' %}" style="margin-right: 20px; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none;">Manage Products</a>
+        <a href="{% url 'admin:app_list' app_label='main_app' %}" style="margin-right: 20px; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none;">Manage Orders</a>
+        <a href="{% url 'admin:app_list' app_label='main_app' %}" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none;">Manage Appointments</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!-- main_app/templates/main_app/product_detail.html -->
+
+{% extends "main_app/base.html" %}
+
+{% block content %}
+<div class="product-detail-container">
+    <h1>{{ product.name }}</h1>
+    <div class="product-description">
+        <p>{{ product.description }}</p>
+    </div>
+    <div class="product-info">
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+    </div>
+    <form action="{% url 'add_to_cart' product.id %}" method="post" class="add-to-cart-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="quantity"><strong>Quantity:</strong></label>
+            <input type="number" name="quantity" id="quantity" min="1" value="1" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+    <div class="back-to-products">
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Products</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .product-detail-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+    .product-detail-container h1 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .product-description {
+        margin-bottom: 20px;
+    }
+    .product-info {
+        margin-bottom: 20px;
+    }
+    .add-to-cart-form {
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+        border-radius: 4px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+    .back-to-products {
+        text-align: center;
+    }
+</style>
+{% endblock %}

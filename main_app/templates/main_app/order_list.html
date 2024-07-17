@@ -1,0 +1,17 @@
+<!-- main_app/templates/main_app/order_list.html -->
+
+{% extends "main_app/base.html" %}
+{% block content %}
+<h1>Your Orders</h1>
+<ul>
+    {% for order in orders %}
+    <li>
+        {{ order.product.name }} - ${{ order.product.price }} x {{ order.quantity }} (Ordered on {{ order.order_date }})
+    </li>
+    {% endfor %}
+</ul>
+{% if not orders %}
+    <p>You have no orders.</p>
+{% endif %}
+<a href="{% url 'product_list' %}">Back to Products</a>
+{% endblock %}
